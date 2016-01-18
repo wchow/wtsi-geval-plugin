@@ -1,0 +1,105 @@
+#-------------------------------------------------------------------------------#
+# Copyright (c) 2014 by Genome Research Limited
+#  All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#    * Redistributions of source code must retain the above copyright
+#      notice, this list of conditions and the following disclaimer.
+#    * Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#    * Neither the name of the Wellcome Trust Sanger Institute, Genome
+#      Research Limited, Genome Reference Consortium nor the
+#      names of its contributors may be used to endorse or promote products
+#      derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL GENOME RESEARCH LIMITIED BE LIABLE FOR ANY
+# DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#-------------------------------------------------------------------------------#
+
+
+use strict;
+
+package EnsEMBL::gEVAL_webcode::SiteDefs;
+
+sub update_conf {
+  $SiteDefs::ENSEMBL_PORT                   = 18000;
+  $SiteDefs::ENSEMBL_PROXY_PORT             = undef; 
+  $SiteDefs::ENSEMBL_SERVERNAME             = undef;
+  $SiteDefs::ENSEMBL_STATIC_SERVER          = '';
+  $SiteDefs::ENSEMBL_MIRRORS                = undef;
+
+  $SiteDefs::APACHE_DIR                     = '/localsw';
+  $SiteDefs::SAMTOOLS_DIR                   = '/localsw/bin/samtools-0.1.18';
+  $SiteDefs::BIOPERL_DIR                    = '/localsw/cvs/bioperl-live/';
+  $SiteDefs::MINI_BIOPERL_161_DIR           = '/localsw/cvs/mini-bioperl-161/';
+  $SiteDefs::ENSEMBL_PRIVATE_AUTH           = '/localsw/etc/privateauth';
+  $SiteDefs::DATAFILE_BASE_PATH             = '/nfs/ensnfs-live';
+  $SiteDefs::APACHE_BIN                     = '/localsw/bin/httpd';
+
+
+  $SiteDefs::ENSEMBL_API_VERBOSITY          = 'WARNING'; ## Shut up the API a bit!
+  $SiteDefs::ENSEMBL_DEBUG_FLAGS           |= $SiteDefs::ENSEMBL_DEBUG_MAGIC_MESSAGES;
+  $SiteDefs::ENSEMBL_DEBUG_FLAGS           |= $SiteDefs::ENSEMBL_DEBUG_VERBOSE_STARTUP;
+  $SiteDefs::ENSEMBL_DEBUG_FLAGS           |= $SiteDefs::ENSEMBL_DEBUG_EXTERNAL_COMMANDS;
+
+  SiteDefs::tmp(  $SiteDefs::ENSEMBL_SERVERROOT.'/tmp/' );
+  SiteDefs::logs( $SiteDefs::ENSEMBL_SERVERROOT.'/logs/' );
+
+  $SiteDefs::ENSEMBL_MAIL_ERRORS            = 0;
+
+  # --- Add the database connection information and the name of the ensembl_account database --- #
+  # ---  for tracking users (ie the old ensembl_users database)                              --- #	
+
+  $SiteDefs::ENSEMBL_USERDB_NAME            = 'ENSEMBL ACCOUNTS DATABASE';
+  $SiteDefs::ENSEMBL_USERDB_USER            = 'USER';
+  $SiteDefs::ENSEMBL_USERDB_HOST            = 'HOST';
+  $SiteDefs::ENSEMBL_USERDB_PORT            = 'PORT';
+  $SiteDefs::ENSEMBL_USERDB_PASS            = 'PASSWORD';
+  $SiteDefs::ENSEMBL_LONGPROCESS_MINTIME    = 10;
+  $SiteDefs::ENSEMBL_HELPDESK_EMAIL         = 'YOUR-EMAL';
+  $SiteDefs::ENSEMBL_NOREPLY_EMAIL          = 'YOUR-OTHER-EMAIL';
+  $SiteDefs::TIDY_USERDB_CONNECTIONS       = 1;
+
+  $SiteDefs::SOAP_PROXY                     = 'IF YOU USE PROXY';
+  $SiteDefs::SAMTOOLS_HTTP_PROXY            = 'IF YOU USE PROXY';
+
+# Some extra things that are ensembl-centric that will be turned off, change the email if you have your own mailing lists.
+#  $SiteDefs::ENSEMBL_MART_ENABLED           = -1; ## This makes it think is enabled - but isn't on this IP!
+#  $SiteDefs::SUBSCRIPTION_EMAIL_LISTS       = [
+#    'announce-join@ensembl.org'               => q(Announcements - low-traffic list for release announcements and major service updates),
+#    'dev-join@ensembl.org'                    => q(Developers' list - discussion list for users of our API and webcode)
+#  ];
+
+# This is for the gEVAL initial release
+  $SiteDefs::ENSEMBL_RELEASE_DATE      = 'February 2014';
+  $SiteDefs::VERSION                   = "e73";
+
+#--------Add Newly created databases here to show up as most recent.  Remember to Remove old ones----------#
+  $SiteDefs::ENSEMBL_PRIMARY_SPECIES  = 'PGP_zfish_20131206'; # Default species
+
+#----------------------------------------------------------------------------------------------------------#
+#  Below is where you add the assembly/species 
+#   follows the format:
+#   $SiteDefs::__species_aliases{ 'should be the name of the ini file' }   = [qw( any aliases )];  Below is where you add the assembly/species 
+#----------------------------------------------------------------------------------------------------------#
+#  $SiteDefs::__species_aliases{ 'PGP_human_20130130' }   = [qw( PGP_human )];
+
+ 
+# add punchlist and Jira objects.
+  $SiteDefs::OBJECT_TO_SCRIPT->{Punchlist} = 'Page'; 
+  $SiteDefs::OBJECT_TO_SCRIPT->{Jira}      = 'Page';
+
+}
+
+1;

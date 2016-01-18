@@ -1,0 +1,52 @@
+Directory structure of geval_website plugin
+
+-conf 
+
+This will contain primarily the SiteDefs.ini and the ini files for each 
+assembly.  SiteDefs.ini will be used to set the global settings for the
+site such as port, database config for user access and the 
+species/assemblies present on the site.  Under ini-files there is the 
+DEFAULTS.ini, this will be used to configure the general site details
+such as where all the species/assemblies databases are stored on, the
+colour scheme of the site, and the images.
+
+-htdocs
+
+This contains all the html pages including many of the landing pages.
+It also contains the location of some of the static images used on the
+site.  Under info/ contains the pages for documentation and help seen 
+on the site.  The walkthrough uses the bootstrap framework.  Under ssi/
+contains the species blurb, which is used on the species/assembly's
+landing page.
+
+-modules
+
+Under this directory contains the primary code that runs the plugin and
+draws the many components in the gEVAL browser.  There are both new and
+extensions of generic EnsEMBL module code.
+
+	* Bio/
+	
+	Its really Bio/EnsEMBL/Glyphset/, where all the code is held.
+	At the end of this tree contains all the glyphs used to draw the
+	components in gEVAL.
+
+	* EnsEMBL/
+	
+	Its really EnsEMBL/Web, where the primary code is located.
+	This is where all the code used in the gEVAL browser is used.
+	For more information regarding the EnsEMBL structure used in this
+	set, please visit: http://www.ensembl.org/info/docs/webcode/dev/index.html
+
+	* Sanger/
+
+	Extra changes to modules.  Not entirely important to gEVAL
+
+	* Statistics/
+	
+	Extra external modules used for punchlists.  Information for 
+	The Statsitcs package can be found here:
+	http://search.cpan.org/~shlomif/Statistics-Descriptive-3.0609/lib/Statistics/Descriptive.pm
+	http://search.cpan.org/~randerson/Statistics-LineFit-0.07/lib/Statistics/LineFit.pm
+
+wc2@sanger.ac.uk   

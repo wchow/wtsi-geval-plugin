@@ -1,0 +1,214 @@
+<html>
+<head>
+<meta name="order" content="1" />
+<title>FAQ</title>
+</head>
+
+<body>
+
+<div class="onecol unpadded">
+<h1>gEVAL Browser Frequently Asked Questions</h1>
+</div>
+
+<div class="onecol unpadded">
+
+<p>
+<ul>
+<li><a href="#q1">There are many different colours on my end/read track.  Can you explain them?</a></li>
+<li><a href="#q2">How often are gEVAL/PGP builds?</a></li>
+<li><a href="#q3">What is the difference between the Human/Mouse Monthly PGP Builds and the Human/Mouse AGP?</a></li>
+<li><a href="#q4">What are WGS assemblies?</a></li>
+<li><a href="#q5">Who provides the assemblies?</a></li>
+<li><a href="#q6">What is gEVAL Browser helping me with, what does it NOT do?</a></li>
+<li><a href="#q7">How can I find out whether a certain gap can be closed?</a></li>
+<li><a href="#q8">How can I find out whether an assembly component is placed correctly?</a></li>
+<li><a href="#q9">How does gEVAL Browser compare to Ensembl?</a></li>
+<li><a href="#q10">What is the GRC?</a></li>
+<li><a href="#q11">What library is the end sequence I found associated to?</a></li>
+<li><a href="#q12">What is the current status of the tiling path</a></li>
+</ul>
+</p>
+</div>
+<br><br><br>
+
+
+
+<p>
+<a name="q1"><div class="onecol info-box"></a>
+<strong>There are many different colours on my end/read track.  Can you explain them?</strong>
+</div>
+You can find the legend for the colours <a href="/info/website/help/gEVAL_docs_v1.3.htm#mapped_ends">here</a>.
+</p>
+
+<p>
+<a name="q2"><div class="onecol info-box"></a>
+<strong>How often are gEVAL/PGP builds?</strong>
+</div>
+gEVAL/PGP Builds vary for each organism, however the GRC organisms are on a more frequent refresh cycle.  For example, zebrafish builds are on a bi-monthly schedule.
+</p>
+
+<p>
+<a name="q3"><div class="onecol info-box"></a>
+<strong>What is the difference between the Human/Mouse Monthly gEVAL/PGP Builds and the Human/Mouse AGP?</strong>
+</div>
+<ol>
+<li>gEVAL/PGP builds include unfinished sequence(phase 1 and 2 sequence) in the assembly, whereas the AGP viewers will substitute this with a gap place holder (certain assemblies include phase 2 but not phase 1).</li>
+<li>gEVAL/PGP builds are more up to date because of the inclusion of unfinished sequences compared to AGP Viewers.</li>
+</ol>
+</p>
+
+
+<p>
+<a name="q4"><div class="onecol info-box"></a>
+<strong>What are WGS assemblies?</strong>
+</div>
+WGS assemblies represent full genome assemeblies using the whole genome shotgun approach.  There are viewers for these assemblies for mouse and zebrafish.  As well the data has been aligned to their respective gEVAL/PGP builds.  Currently for GRC organisms, the wgs assemblies are primarily used to improve sequence content in regions not covered by clones but of course it is also useful for investigating potential sequence rearrangment and variation.
+</p>
+
+<p>
+<a name="q5"><div class="onecol info-box"></a>
+<strong>Who provides the assemblies?</strong>
+</div>
+<ul>
+<li>Human, Mouse, Zebrafish - <b>Genome Reference Consortium</b>
+<li>Pig - <b>Sanger/Pig Sequencing Consortium</b>
+<li>Helminth - <b>Sanger/Helminth Sequencing Group</b>
+<li>Rat - <b>Rat Genome Sequencing Consortium</b>
+</ul>
+</p>
+
+<p>
+<a name="q6"><div class="onecol info-box"></a>
+<strong>What is gEVAL browser helping me with, what does it NOT do?</strong>
+</div>
+The gEVAL Browser is a frequently updated browser whose target audience is primarily directed to those who work on creating and improving assemblies.  Commons examples of usage is to see what areas are, or should be targeted for sequencing, possible haplotypic variation and selection of new clones to sequence for a specific region.  The gEVAL viewer while usually having a more updated path than Ensembl, is not a browser with a gene-centric focus.  The fact there are cdna/transcript mappings, is more for using the model to compare neighboring clones its mapped on to.    
+</p>
+
+<p>
+<a name="q7"><div class="onecol info-box"></a>
+<strong>How can I find out whether a certain gap can be closed?</strong>
+</div>
+Heres a check list to follow to see if 2 clones separated by a gap can be closed or not: <br>
+<ol>
+<li>turn on the selfcomp track and see if there are reciprical alignments available for the two clones.  If so and no overlap was generated then possible reasons are very high variation in the overlap, or one completely overlaps another creating what would be a false 5'/5' or 3'/3' join with the clone and the clone on the other end.  If you do a alignment between the 2 clones and overlap is relatively acceptable, please let us know, and we either fix or let the appropriate people fix the issue.</li>
+<li>turn on the end mapping track(s).  First thing you want to do is look for spanning ends.  These are the sequenced paired ends from the clone it came from.  For example, a 123F01.T7 on clone A and 123F01.SP6 on clone B with correct orientation pointing towards the expected insert, can be chosen as a spanning clone.  This clone can then be sequenced to fill that gap.
+<li>If there are no spanning ends, it could be possible that the gap is larger than a single clone, and some sort of walking out the edge may be required. An option is look for end hangers, these are ends that are on the edge of a clone to the gap with an orientation pointing towards the gap.  Like a primer walk this clone can be sequenced added to the path, and the gap shortened.
+<li>Another option, if available is to use the wgs assemblies and see if any large wgs contigs cover a gap, if so no only will you possibly get an estimate of the gap size, but you can use the contig in combination with the clones on the edge to confidently choose hangers and spanners.
+<li>** As always, regions of interest may be quite repetitve, and such a chosen hanger or spanner, may not be unique to be used.  It is always useful to check the region with selfcomp, and if the end is not green colour, to see how repetitive the region the end hits is.</li>
+</ol>
+</p>
+
+<p>
+<a name="q8"><div class="onecol info-box"></a>
+<strong>How can I find out whether an assembly component is placed correctly?</strong>
+</div>
+This is to say, how can I be sure that the clone or the region I am interested is where it supposed to be.  Heres a couple strategies to confirm if this is the case or not.
+<ul>
+<li> markers, although a genetic and physical map is a major resource for mapping work, as projects progress, more maps are generated and added, helping increase the resolution of the marker coverage across the genome.  More contigs and clones can then be pinpointed.  In the browser, the marker track can be turned on and the markers are colour coded.  Magenta markers indicate the markers are where it should be on the chromosome, blue coloured markers indicate that it should not be on the current chromosome/location.  See for more <a href="/info/website/help/gEVAL_docs_v1.3.htm#markers">info</a>.
+<li> blue coloured end mappings, like markers, some ends based on fpc data, have a location associated with it.  This too can be used like the markers, indicating whether or not the location is correct. See for more <a href="/info/website/help/gEVAL_docs_v1.3.htm#mapped_ends">here</a>.
+
+</ul>
+</p>
+
+<p>
+<a name="q9"><div class="onecol info-box"></a>
+<strong>How does the gEVAL browswer compare to Ensembl?</strong>
+</div>
+The gEVAL browser will have builds of the tile path that is more frequent than that seen in Ensembl.  This is because Ensembl will take a freeze of the path at one date and spend a bit of time preparing and completing numerous analysis that makes up its build.  Because of this, Ensembl will have more analyses, specificaly gene-ctric ones.  The gEVAL Browser is not fully intended to provide any analysis on genes or related data, it is more focused on sequence improvement of the available genomes.  However having said that, if a gene of interest is in an poorly represented area in Ensembl, one can use the gEVAL browser to re-analyze the area, as a) the path will be more up to date containing finished and newly sequenced unfiniished clone sequence and b) the data and analysis will focus on giving an impression of the relative health of the region of interest.  Navigation-wise it will be very similar to Ensembl as it uses a lot of its web framework.  One addition in gEVAL browser is the use of Punchlists, specifically tailored list(s) that can be used to methodically resolve issues.
+</p>
+
+<p>
+<a name="q10"><div class="onecol info-box"></a>
+<strong>What is the GRC?</strong>
+</div>
+The GRC or <a href="http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/index.shtml"><strong>Genome Reference Consortium</strong></a> is a group of educational institutes which was formed to improve the representation of reference genomes. At the time the human reference was initially described, it was clear that some regions were recalcitrant to closure with existing technology. The main reason for improving the reference assemblies are that they are the cornerstones upon which all whole genome studies are based (i.e. the 1000 Genomes Project).<br>
+The GRC currently maintains the reference genomes of human, mouse and zebrafish.
+</p>
+<p>
+The members of the GRC are:<br>
+<ul>
+<li>The Wellcome Trust Sanger Institute</li>
+<li>The Genome Center at Washington University</li>
+<li>The European Bioinformatics Institute</li>
+<li>The National Center for Biotechnology Information</li>
+</ul>
+
+
+<p>
+<a name="q11"><div class="onecol info-box"></a>
+<strong>What are the end libraries used?</strong>
+</div>
+<strong>Human</strong>
+<table class="ss">
+<tr><th>library</th><th>external prefix</th><th>internal prefix</th><th>library size distribution</th><th>range used in gEVAL</th></tr>
+<tr><td>Chori-17</td><td>CH17</td><td>bMO</td><td><a href='http://bacpac.chori.org/sizeDistributionPopup.php?id=231'>link</a></td><td>146689-269814</td></tr>
+<tr><td>Whitehead fosmid</td><td>WI2</td><td>fW</td><td>nolink</td><td>31067-48600</td></tr>
+<tr><td>RPCI-11</td><td>RP11</td><td>bA</td><td><a href='http://bacpac.chori.org/rpci11clonesize.html'>link</a></td><td>113124-228383</td></tr>
+<tr><td>Chori-507</td><td>CH507</td><td>bPA</td><td>nolink</td><td>default</td></tr>
+<tr><td>ABC7</td><td>ABC7</td><td>f7A</td><td>nolink</td><td>25492-49289</td></tr>
+<tr><td>ABC8</td><td>ABC8</td><td>f8A</td><td>nolink</td><td>26065-46749</td></tr>
+<tr><td>ABC9</td><td>ABC9</td><td>f9A</td><td>nolink</td><td>31855-47051</td></tr>
+<tr><td>ABC10</td><td>ABC10</td><td>f10A</td><td>nolink</td><td>34984-46978</td></tr>
+<tr><td>ABC11</td><td>ABC11</td><td>f11A</td><td>nolink</td><td>34406-45615</td></tr>
+<tr><td>ABC12</td><td>ABC12</td><td>f12A</td><td>nolink</td><td>34762-44676</td></tr>
+<tr><td>ABC13</td><td>ABC13</td><td>f13A</td><td>nolink</td><td>33534-44996</td></tr>
+<tr><td>ABC14</td><td>ABC14</td><td>f14A</td><td>nolink</td><td>33137-46638</td></tr>
+<tr><td>ABC16</td><td>ABC16</td><td>f16A</td><td>nolink</td><td>32107-43947</td></tr>
+<tr><td>ABC24</td><td>ABC24</td><td>f24A</td><td>nolink</td><td>33193-44338</td></tr>
+<tr><td>ABC27</td><td>ABC27</td><td>f27A</td><td>nolink</td><td>33265-44107</td></tr>
+</table>
+
+<strong>Mouse</strong>
+<table class="ss">
+<tr><th>library</th><th>external prefix</th><th>internal prefix</th><th>library size distribution</th><th>range used in gEVAL</th></tr>
+<tr><td>RPCI-24</td><td>RP24</td><td>bN</td><td><a href='http://bacpac.chori.org/images/sizedistribution/RPCI-24size_s1.jpg'>L1</a><a href='bacpac.chori.org/images/sizedistribution/RPCI-24size_s2.jpg'>L2</a></td><td>91404-242955</td></tr>
+<tr><td>RPCI-23</td><td>RP23</td><td>bM</td><td><a href='http://bacpac.chori.org/rpci23clonesize.html'>link</a></td><td>122253-270705</td></tr>
+<tr><td>Whitehead mouse fosmid</td><td>WI1</td><td>fM</td><td>nolink</td><td>28450-50967</td></tr>
+<tr><td>Chori-25</td><td>CH25</td><td>bMS</td><td><a href='http://bacpac.chori.org/sizeDistributionPopup.php?id=90'>link</a></td><td>43595-162830</td></tr>
+<tr><td>Chori-36</td><td>CH36</td><td>bML</td><td><a href='http://bacpac.chori.org/sizeDistributionPopup.php?id=226'>link</a></td><td>113292-247285</td></tr>
+</table>
+
+<strong>Zebrafish</strong>
+<table class="ss">
+<tr><th>library</th><th>external prefix</th><th>internal prefix</th><th>library size distribution</th><th>range used in gEVAL</th></tr>
+<tr><td>CHORI-211</td><td>CH211</td><td>zC</td><td><a href='http://bacpac.chori.org/sizeDistributionPopup.php?id=35'>link</a></td><td>97784-232694</td></tr>
+<tr><td>DanioKey</td><td>DKEY</td><td>zK</td><td>nolink</td><td>87399-268251</td></tr>
+<tr><td>DanioKey Pilot</td><td>DKEYP</td><td>zKp</td><td>nolink</td><td>121938-239280</td></tr>
+<tr><td>CHORI-73</td><td>CH73</td><td>zH</td><td><a href='http://bacpac.chori.org/sizeDistributionPopup.php?id=281'>link</a><td>67324-152296</td></tr>
+<tr><td>RPCI-71</td><td>RP71</td><td>bZ</td><td><a href='http://bacpac.chori.org/rpci71_avgsize.htm'>link</a><td>90017-205409</td></tr>
+<tr><td>ZFISHFOS</td><td>ZFISHFOS</td><td>zF</td><td>nolink</td><td>32722-49432</td></tr>
+<tr><td>CHORI-1073 (FOS)</td><td>CH1073</td><td>zFD</td><td>nolink</td><td>31911-45771</td></tr>
+</table>
+</p>
+
+<strong>Pig</strong>
+<table class="ss">
+<tr><th>library</th><th>external prefix</th><th>internal prefix</th></tr>
+<tr><td>PigE</td><td>PigE</td><td>bT</td></tr>
+<tr><td>CHORI-242</td><td>CH242</td><td>bE</td></tr>
+<tr><td>SBAB bI Clones</td><td>PigI</td><td>bI</td></tr>
+<tr><td>WTSI_1005</td><td>WTSI_1005</td><td>fSS</td></tr>
+</table>
+</p>
+
+
+<p>
+<a name="q12"><div class="onecol info-box"></a>
+<strong>What is the current status of the tiling path?</strong>
+</div>
+Depending on organism, gEVAL still takes a freeze of the tiling path for each build roughly on a 2-4 month cycle.  Clones that may be seen as being sequenced, or unfinished, may have progressed if you were to look at it today.  To see the current status of all the clones and the path itself, the Sanger Institute made tool <a href="http://www.sanger.ac.uk/cgi-bin/humpub/chromoview">Chromoview</a> can be used for Human, Mouse, Zebrafish and Pig.  It is updated twice weekly and will display clone paths per chromosome for each organism, the overlaps, the AGPs and links to EMBL records and to the gEVAL. 
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

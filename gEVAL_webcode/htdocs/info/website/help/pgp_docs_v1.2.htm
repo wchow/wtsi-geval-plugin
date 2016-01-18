@@ -1,0 +1,766 @@
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+ <title>PGP Viewer Walkthrough</title>
+
+<!--favicon doesn't get recognized for htm or something, will add it-->
+
+<link rel="icon" 
+      type="image/png" 
+      href="/i/g_favicon.png">
+
+
+ <!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet" >
+<link href="css/bootstrap-responsive.css" rel="stylesheet" >
+<!-- Include jQuery -->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!-- additional style -->
+<style>
+
+.contents-btn {
+position:absolute;
+right:10px;
+bottom: 5px;
+}
+
+.navbar-inner {
+  background-color: #2E2E2E; /* background color will be black for all browsers */
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
+}
+
+.sidebar-nav-fixed {
+    position:fixed;
+    top:50px;
+    width:21.97%;
+}
+
+.content-header {
+    margin-top:-45px;
+    padding-top: 45px;
+    
+}
+
+
+@media (max-width: 767px) {
+    .sidebar-nav-fixed {
+        position:static;
+        width:auto;
+    }
+}
+
+@media (max-width: 979px) {
+    .sidebar-nav-fixed {
+        top:20px;
+    }
+}
+
+
+</style>
+</head>
+
+<!-- BEGIN: ALL CONTENT CODE -->
+
+<body>
+
+<!-- Add Top branded Navbar to mimic GEval -->
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner" style='background-color:#2e2e2'>
+    <div><a class="brand" href="/index.html"><img src='/i/pgpviewer_grc.png' alt='gevallogo'" style="height:45px; width:180px"></a></div>
+
+    <div class="dropdown contents-btn">
+    <a class="dropdown-toggle" data-toggle="dropdown" >sitemap</a>
+      <ul class="dropdown-menu pull-right" role="menu"
+    aria-labelledby="dLabel">
+	<li><h5 style="padding-left:5px">Docs Contents</h5></li>
+	<li class="divider"></li>
+      <li><a tabindex="-1" href="#intro">Introduction</a></li>
+        <li class="dropdown-submenu">
+        <a tabindex="-1" href="#">Site Navigation</a>
+           <ul class="dropdown-menu">
+	     <li><a tabindex="-1" href="#fpage">Front Page</a></li>
+	     <li><a tabindex="-1" href="#opage">Organism Specific Page</a></li>
+	     <li><a tabindex="-1" href="#karyo">Karyotype</a></li>
+	     <li><a tabindex="-1" href="#sample">Sample Location</a></li>
+	     <li><a tabindex="-1" href="#navbar">Navigation tabs</a></li>
+	     <li><a tabindex="-1" href="#overview">Region Overview</a></li>
+	     <li><a tabindex="-1" href="#detail">Region in Detail</a></li>
+
+           </ul>
+	</li>
+	<li class="dropdown-submenu">
+	<a tabindex="-1" href="#">Tracks</a>
+           <ul class="dropdown-menu">
+	     <li><a tabindex="-1" href="#mapped_ends">Mapped Ends</a></li>
+	     <li class="divider"></li>
+	     <li><a tabindex="-1"href="#cdna">cdna/transcripts</a></li>
+	     <li><a tabindex="-1" href="#selfcomp">Selfcomp</a></li>
+	     <li><a tabindex="-1" href="#markers">Markers</a></li>
+	     <li><a tabindex="-1" href="#repeats">Repeats</a></li>
+	     <li><a tabindex="-1" href="#opmap">Optical Maps</a></li>
+	     <li><a tabindex="-1" href="#pipelineclones">Pipeline clone Tracks</a></li>
+
+           </ul>
+	 </li>
+	 <li class="dropdown-submenu">
+	 <a tabindex="-1" href="#">Supplementary Tracks</a>
+	   <ul class="dropdown-menu">
+	     <li><a tabindex="-1" href="#jira">JIRA tickets</a></li>
+	     <li><a tabindex="-1" href="#clone">Clone and Overlaps</a></li>
+	     <li><a tabindex="-1" href="swaI#">Insilico Digest</a></li>
+	   </ul>  
+	 </li>
+	 <li><a tabindex="-1" href="#compara">PGP Compara</a></li>
+	 <li class="dropdown-submenu">
+	 <a tabindex="-1" href="#">Lists</a>
+	   <ul class="dropdown-menu">
+	     <li><a tabindex="-1" href="#markerlist">Marker List</a></li>
+	     <li><a tabindex="-1" href="#punchlist">Punchlists</a></li>
+	   </ul>  
+         </li>
+	 <li class="divider"></li>
+	 <li><a tabindex="-1" href="#allexamples">All Examples</a></li>
+	 <li><a tabindex="-1" href="#">Organism-specific Notes</a></li>
+
+	 
+	 </ul>
+    </div>
+  </div>
+</div>
+
+<!-- END: branded navbar -->
+
+
+
+
+
+
+<!-- ## 2-Column Grid ## -->
+
+  <div class="container-fluid" >
+   <div class="row-fluid">
+     
+     <!--## Side Navbar ##-->
+     <div class="span3">
+       <div class="nav sidebar-nav-fixed" id="sidenav">
+        <!--Sidebar content-->
+	 
+       <div class="page-header">
+	 <h2>PGPDocs <small>walkthrough</small></h2>
+       </div>
+
+	 <ul class="nav nav-tabs nav-stacked">
+
+	  <li><a href="#intro" >Introduction</a></li>
+	  <li> <a id="myCollapse1" data-toggle="collapse" data-target="#submenu1" >Site Navigation <b class="icon-chevron-right"></b></a>
+	     <ul id="submenu1" class="collapse nav-list" role="menu" >
+	       <li><a href="#fpage" >Front Page</a></li>
+	       <li><a href="#opage">Organism Specific Page</a></li>
+	       <li><a href="#karyo">Karyotype</a></li>
+	       <li><a href="#sample">Sample Location</a></li>
+	       <li><a href="#navbar">Navigation tabs</a></li>
+	       <li><a href="#overview">Region Overview</a></li>
+	       <li><a href="#detail">Region in Detail</a></li>
+	     </ul>
+	  </li>
+	  <li><a id="myCollapse2" data-toggle="collapse" data-target="#submenu2">Tracks<b class="icon-chevron-right"></b></a>
+	     <ul id="submenu2" class="collapse nav-list" role="menu">
+	       <li><a href="#mapped_ends">Mapped Ends</a></li>
+	       <li><a href="#other_mappings">Other Mappings</a></li>
+	       <ul>
+		 <li><a href="#cdna">CDNA/transcripts</a></li>
+		 <li><a href="#selfcomp">Self Comparisons</a></li>
+		 <NOSCRIPT><li><a href="#wgs">Whole Genome Shotgun</a></li></NOSCRIPT> <!-- NOT USED -->
+		 <li><a href="#markers">Markers</a></li>
+		 <li><a href="#repeats">Repeats</a></li>
+		 <li><a href="#opmap">Optical Maps</a></li>
+		 <li><a href="#pipelineclones">Pipeline clone tracks</a></li>
+	       </ul>
+	     </ul>
+	  </li>
+	  <li><a id="myCollapse3" data-toggle="collapse" data-target="#submenu3">Supplementary Tracks<b class="icon-chevron-right"></b></a>
+	      <ul id="submenu3" class="collapse nav-list" role="menu">
+		<li><a href="#jira">JIRA tickets</a></li>
+		<li><a href="#clone">Clone and Overlaps</a></li>
+		<li><a href="#swaI">Insilico Digest</a></li>
+	      </ul>
+	  </li>
+	  <li><a href="#compara">PGP Compara</a></li>
+	  <li><a id="myCollapse4" data-toggle="collapse" data-target="#submenu4">Lists<b class="icon-chevron-right"></b></a>
+	      <ul id="submenu4" class="collapse nav-list" role="menu">
+		<li><a href="#markerlist">Marker List</a></li>
+		<li><a href="#punchlist">Punchlists</a></li>
+	      </ul>
+	  </li>
+	  <li><a href="#allexamples">All Examples</a></li>
+	  <li><a id="myCollapse5" data-toggle="collapse" data-target="#submenu5">Organism-specific Notes<b class="icon-chevron-right"></b></a>
+	      <ul id="submenu5" class="collapse nav-list" role="menu">
+		<li>Human</li>
+		<li>Mouse</li>
+		<li>Zebrafish</li>
+		<li>Pig</li>
+		<li>Other</li>
+	      </ul>
+	  </li>
+	</ul>
+      </div> <!--end: nav sidebar-nav-fixed-->
+     </div> <!--end: span3-->
+
+<!--END: left vertical navbar-->
+
+
+
+
+
+     
+     
+     <!--## Main Content Page ##-->
+     <div class="span9">
+
+       <!-- test -->
+       <!-- endtest -->
+       
+     <section id="intro" style="padding-top:60px"><a name="intro"></a>
+       <h3>Introduction</h3>
+       <p>The PGP Viewer is the visual representation or the front end of a group of databases used to assist in sequencing and finishing genome projects of various vertebrate and non-vertebrate organisms.</p>
+       <p>GP is an acronym for <em>"pseudo-golden path"</em>, a term used to describe the minimum tiling path used in the assembly of the majority of the viewers.  The closely associated term is AGP, in which we have AGP viewers for Human and mouse.  The primary difference between the PGP and AGP data is the inclusion of partial incomplete sequenced clones in PGP, whereas AGP contains only finished sequence clones.  NCBI has a detailed explanation regarding the AGP format <a href="http://www.ncbi.nlm.nih.gov/projects/genome/assembly/agp/AGP_Specification.shtml">here</a>.  Thus a PGP viewer will contain more up to date information compared to an AGP viewer.</p>
+       <p>One common question is what is <em>"What is the difference between the builds here compared to the one seen in the Ensembl Genome Browser?"</em>.
+       First the frequency Ensembl creates and releases a build/freeze is low compared to the PGP viewer.  For example, the zebrafish build is released once or twice a year in Ensembl, whereas the zebrafish build aims to be released once a month.  This allows for a more up to date representation of the genome.  However having said that, while Ensembl can be used in improving sequence quality, the PGP Viewer serves primarily a different purpose compared to Ensembl.  Ensembl's larger focus is on deep gene-centric analyses, in which PGP viewer does not perform.  This is one reason for a quicker turnaround rate in builds.  The PGP viewer focuses on the data and analysis results that can help in the improvment of sequence assemblies and resolve regional discrepencies.  More examples of the usage to assist in these issues will be described in subsequent sections</p>
+       <p>The PGP Viewer is developed and maintained by the <strong>Genome Reference Informatics Team</strong>.  The group provides support to the Genome Reference Consortium (GRC), who's primary focus is working to create assemblies that better represent the diversity and provide more robust substrates for genome analysis.</p>
+     </section>
+
+
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+
+     <section id="fpage" class="content-header">
+       <h3>Front Page</h3>
+       <img src="i/front_page_wt.png" alt="pgp frontpage walkthrough">
+        <ol>
+          <li>List of organisms and their associated viewers.  The main and most recent PGP viewer will be on the top of the list, and depending on organism, followed by previous releases, AGP viewers or WGS assembly viewers.</li>
+          <li>Updates, problems, outages will be listed as news items in this section.  This is linked to the PGP Blog and almost all entries will be published on the twitter account.  This allows notifications if the PGP viewer happens to be down or of any issues.</li>
+        </ol>
+     </section>
+
+	
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+	
+     <section id="opage" class="content-header"><a name="opage"></a>
+       <h3>Organism Specific Page</h3>
+       <p><img src="i/organism_page_wt.png" alt="pgp frontpage walkthrough"/></p>
+       <p><img src="i/org_spec_page_wt.gif" alt="pgp organism_specific page"></p>
+       <p>The front page of each organism viewer includes a short description of the project and any associated external links.  Central to this page is the search bar allowing you to search clone, read, location and other data.  The search function will return results with the occurence of the search term, for example the search for <a href="http://pgpviewer.ensembl.org/PGP_zfish/UniSearch/Summary?species=PGP_zfish;idx=;q=zFD282F19">zFD282F19</a> would return not only the clone, but the contigs and the all the other mappings that contain this term, listed and separated by their appropriate categories.  The side navigation bar is the entry to the genome browser.  The karyotype link returns a dynamic image of the karyotype that can be clicked or a region dragged to enter the browser.  The quickest way to begin looking at the data is to click on the location link which jumps to a sample location.  There is also a tab with the section as well for navigation. </p>
+     </section>
+
+	
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+
+     <section id="karyo" class="content-header"><a name="karyotype"></a>
+       <h3>Karyotype</h3>
+       <p><img src="i/karyotype_wt.png" alt="pgp karyotype walkthrough"></p>
+       <p>Click and drag a region to navigate to the specific region.  There is also a drop down menu for chromosomes/objects not in the image.  This usually pertains to un-localized regions.</p>
+     </section>
+
+	
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+	
+     <section id="sample" class="content-header"><a name="sample"></a>
+       <h3>Sample Location</h3>
+       <p>This link acts as a quick link to get into the browser.  It will jump into a pre-determined region.  From there, different analysis tracks can be turned on and off and a different region can be selected.</p>
+     </section>
+
+
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+
+     <section id="navbar" class="content-header"><a name="navbar"></a>
+       <h3>Navigation Tabs</h3>
+       <p><img src="i/nav_bar_wt.png" alt="pgp navbar walkthrough" style="width:40%;height80%;float:left"></p>
+       <p>The left navigation bar is present throughout most of the browser.
+          <div style="overflow:hidden">
+	    <dl class="dl-horizontal">
+           <dt>Karyotype Page:</dt><dd>returns to the Karyotype region page.</dd>
+           <dt>Chr Summary:</dt><dd>Like the Karyotype page, but specifically for the individual chromosome/object currently the browser is on.  Includes statistics for the chromosome.</dd>
+           <dt>Region Overview:</dt><dd>The broadest view.  Here the chromosome can be viewed at no size limits.  However because of this only a limited number of tracks are available, and this varies with each organism.  Examples include JIRA tickets, fpc contigs and clones.</dd>
+           <dt>Region in Detail:</dt><dd>The primary view.  Currently a max limit of 2mb size viewable window is allowed.  Here is where you can turn on all the tracks via the configure page on the left navigation bar.</dd>
+           <dt>PGP Compara:</dt><dd>PGP Compara opens up a view for comparing alignments between assemblies that exist in the viewer.</dd>
+           <dt>Marker list:</dt><dd>will return all mapped markers in the region that is being viewed, and links to the appropriate marker information.</dd>
+           <dt>Configure this Page:</dt><dd>Use this tab to configure tracks on the browser.  You can also use this to configure the look of the browser, such as increasing the viewable size of the browser window.</dd>
+           <dt>Export data:</dt><dd>Currently you can use this to dump the sequence in fasta format to your web browser or a text file for the region you are viewing.</dd>
+          </div>
+       </p>
+     </section>
+
+
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+	  
+     <section id="overview" class="content-header"><a name="overview"></a>
+       <h3>Region Overview</h3>
+       <p><img src="i/region_overview_wt.png" alt="pgp reg_overview walkthrough"></p>
+       <p>The Region Overview allows a global snapshot of the chromosome.  Here only a limited number of tracks are available depending on organism.  FPC contigs, JIRA tickets and clone information is available.  Examples of usage of this page is to quickly glance where a) where all the JIRA issues are b) where all the FPC contig gaps are and c) which clones are finished or unfinished or where clones have been picked for sequencing.</p>
+     </section>
+
+	  
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+	  
+     <section id="detail" class="content-header"><a name="detail"></a>
+       <h3>Region in Detail</h3>
+       <p><img src="i/region_indetail_wt.png" alt="pgp reg_detail walkthrough"></p>
+       <p>The primary browser window to view analyses.  This consists of two windows, representing different size viewpoints.  Both windows are draggable and clickable.  Dragging into zoom in or out of the top window will reflect the bottom window.  All tracks for both windows are configured via the Configure this page tab on the left navigation bar.  Specific navigation using coordinates are also available.  The bottom window has as its base the path of clones/contigs and all analysis tracks are of respect to this.  The top window, as previously stated is a larger window size, and includes the clone/contigs and its relation to its scaffold/superscaffold level, or in most cases the fpc contigs.</p>   
+     </section>
+
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+     <section id="mapped_ends" class="content-header"><a name="mapped_ends"></a>
+       <h3>Mapped Ends</h3>
+       <p><img src="i/mapped_ends2.jpg" alt="pgp mapped_ends walkthrough"></p>
+       <p>One of the most asked question is the colour coding of the mapped ends.  The above table lists the colours.  Most of the mapped end analyses are separated into a 'rep' and 'no_rep' set.  The two sets represent filtered results based on a top limit, followed by times mapped, with no_rep being the filtered set and the rep being all remaining results.</p>
+       <p><img src="i/ends_wt.png" alt="pgp ends example walkthrough"></p>
+     </section>
+
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+     <section id="other_mappings" class="content-header"><a name="other_mappings"></a>
+       <h3>Other Mappings (varies with each organism)</h3>
+       <p>All objects/glyphs are clickable and will return a pop up menu (zmenu) with relavant information and links.</p>
+       <ul>
+	 
+	 <!--** Other Mappings Categories **-->
+
+	 <!-- SubCat: cdna -->
+	 <a name="cdna" class="content-header"></a>
+	 <li><h3>cDNA/transcript mappings</h3></li>
+	 <p><img src="i/cdna_wt.png" alt="pgp cdna walkthrough image"></p>
+	 <p>
+	 <block style="color:green;font-weight:bold">Green</block>: complete mapping<br>
+	 <block style="color:orange;font-weight:bold">Orange</block>: incomplete mapping (coverage etc.)<br>
+	 <strong>zmenu:</strong> returns coordinate information for the matching results, coverage, percent identity and links to records of the cdna/transcript and where it may also map in the genome.
+	 </p>
+
+	 <!--SubCat: selfcomp -->
+	 <a name="selfcomp" class="content-header"></a>
+	 <li><h3>Self Comparisons</h3></li>
+
+	 <div>
+	   <a href="#mymodal" role="button" class="btn btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i> Gap Closure</a>
+	 <div>
+	   
+	 <p><img src="i/selfcomp_wt.png" alt="pgp selfcomp walkthrough image"></p>
+	 <p>The selfcomp track shows alignments between clones/contigs against all others in that current assembly.  This can reveal overlaps between neighboring clones and haplotypic or troublesome regions.  The above example indicates that the two clones are very similar, recipricol alignments to be exact. This is because perhaps one overlaps another, or that the overlap was not caught because of high variation.</p>
+	 <block style="color:#00C628;font-weight:bold">Green</block> - if the self comp hits a clone that is not only a neighbour but 500kb away (this is arbitrary and can be changed).  Rational is to capture entire contigs that can be flipped with the right clone being adjacent.<br>
+	 <block style="color:#CB7410;font-weight:bold">Orange</block> - hits a clone that is still on the same chromosome but not in the vicinity of 500kb.<br>
+	 <block style="color:#1A54FF;font-weight:bold">LightBlue</block> - hits a clone in an alternate region (non-chr).<br>
+	 <block style="color:#D02828;font-weight:bold">Red</block> - hit elsewhere.<br>
+	 <strong>zmenu:</strong> returns coordinate information for the matching results, and links to the corresponding hit in the genome itself.   
+	   
+	 <!--SubCat: wgs -->
+	 <!-- NOT USED -->
+	 <NOSCRIPT>
+	 <a name="wgs"></a>
+	 <li><h3>Whole Genome Shotgun Alignments</h3></li>
+	 <p><img src="i/wgs_wt.png" alt="pgp wgs walkthrough image" class="wt"></p>
+	 The wgs track represents alignments of the whole genome shotgun assembly to the genome of interest.  Currently there are 2 wgs assemblies for mouse and 3 for zebrafish.  All 5 of these have available its own independant viewer.  As the main genome assembly in view is (for the vertebrates) utilising a clone by clone sequencing strategy, the whole genome shotgun assemblies can be used to help bridge certain areas of issue such as gaps (the level of fragmentation of the wgs makes it not an ideal assembly to act as the reference, and as the clone strategy was decided previously, this data is a good tool to help improve the assembly).<br>
+	 <strong>zmenu:</strong> returns coordinate information for the matching results, and links to the corresponding hit in the genome itself.      
+	 </p>
+	 </NOSCRIPT>
+	 <!-- NOT USED -->
+
+	 <!--SubCat: markers-->
+	 <a name="markers" class="content-header"></a>
+	 <li><h3>Markers</h3></li>
+	 <p><img src="i/marker_wt.png" alt="pgp markers walkthrough image"></p>
+	 <block style="color:magenta;font-weight:bold">Magenta</block>: indicates marker map location and current location is the same <br>
+	 <block style="color:blue;font-weight:bold">Blue</block>: indicates marker map location and current location is different<br>
+	 <block style="color:gray;font-weight:bold">Gray</block>: no marker map location<br>
+	 <strong>zmenu:</strong> returns a link to a page for detailed information regarding the marker such as map name, primers and synonyms.
+	 
+	 <!--SubCat: repeats-->
+	 <a name="repeats" class="content-header"></a>
+	 <li><h3>Repeats</h3></li>
+	 <p><img src="i/repeat_wt.png" alt="pgp repeats walkthrough image"></p>
+	 <block style="color:coral;font-weight:bold">Orange</block>: acrocentromeric repeat <br>
+	 <block style="color:teal;font-weight:bold">Teal</block>: centromeric repeat<br>
+	 <block style="color:lime;font-weight:bold">Green</block>: telomeric repeat<br>
+	 <block style="color:gray;font-weight:bold">Gray</block>: default repeat colour<br>
+	 <strong>zmenu:</strong> returns length, type and class of the repeat.
+
+
+	 <!--SubCat: Optical Maps-->
+	 <a name="opmap" class="content-header"></a>
+	 <li><h3>Optical Maps</h3></li>
+	 <p>The Optical Map data was provided by the Schwartz
+	 Lab. Further information regarding the technology can be
+	 found <a
+	 href="http://en.wikipedia.org/wiki/Optical_mapping">here</a>. The
+	 optical map tracks can be found in the submenu "Optical Maps"
+	 if available.  The tracks in this section can be grouped into
+	 the categories:
+	 <ul>
+	 <li>insilico digest in which the map was created on</li>
+	 <li>specific cell line (eg GM18994) composing of tracks for</li>
+	    <ul>
+	      <li>unaligned fragments</li>
+	      <li>aligned fragments</li>
+	    </ul>
+	 </ul>
+	 <p><img src="i/om_menu_wt.png" atl="pgp optical map menu
+	 image"></p>
+
+	 <p>
+	 
+	 
+
+	 
+	 <!--SubCat: pipeline clones-->
+	 <a name="pipelineclones" class="content-header"></a>
+	 <li><h3>Pipeline clone tracks</h3></li>
+	 <p>There are four tracks showing the positions of clones in the sequencing pipeline based on end-pair locations.
+	 <ul>
+	   <li>TPF clone: Clones in a current TPF</li>
+	   <li>Active non-TPF clone: Clones not in any current TPF that have not been cancelled.</li>
+	   <li>Cancelled non-TPF clone: Clones not in any current TPF that have been cancelled, and which do not have an INSDC accession</li>
+	   <li>Cancelled +seq non-TPF clone: Clones not in any current TPF that have been cancelled, and which have an INSDC accession.</li>
+	 </ul>
+	 </p>
+	 <p>"Cancelled" clones are defined as those whose current project status is one of 'Shotgun on hold', 'On hold', or 'Cancelled'.</p>
+	 <p>For all these tracks, the glyphs are shown in the same way:
+	 <ul>
+	   <li>Shape:
+	       <ul>
+		 <li>If both clone-ends match to sequence within 1 Mb of each other, the glyph is shown as a rectangle stretching between the end-positions.</li>
+		 <li>If there is only one clone-end, or the clone-ends lie more than 1 Mb apart, then each clone-end has a glyph with an arbitrary length of 40 kb and an arrow on one end. The square end is at the position of the end, and the arrow shows the direction the clone extends towards from that point.</li>
+	       </ul>
+	       <img src="i/pipeline_clone_glyph_shapes.png" alt="pgp markers walkthrough image" style="width:25%"><br>
+	     </li>
+	     <li>Border colour:
+	     <ul>
+	       <li><block style="color:#00cd00;font-weight:bold">Green</block>: The clone is in a current TPF.</li>
+	       <li><block style="color:#eeee00;font-weight:bold">Yellow</block>: The clone used to be in a TPF, but now is not.</li>
+	       <li><block style="color:#cd5c5c;font-weight:bold">Red</block>: The clone has never been in a TPF.</li>
+	     </ul>
+	   </li>
+	   <li>Area colour:
+	   <ul>
+	     <li><block style="color:#cccccc;font-weight:bold">Grey</block>: The ends are not repetitive.</li>
+	     <li><block style="color:#ffa07a;font-weight:bold">Pink</block>: The ends are repetitive. This is displayed for any clone that has more than a single end or pair of ends.</li>
+	   </ul>
+	 </li>
+       </ul>
+       </p>
+       <p><strong>zmenu:</strong> The menu that comes up when you click on these glyphs is largely self-explanatory.
+       <ul>
+	 <li>For repetitive cases, links are given to all occurrences of the end(s) associated with this glyph.</li>
+	 <li>Where the clone is associated with a JIRA ticket, a link is provided to that ticket. Note that the assignment to JIRA tickets only works if the text of the JIRA ticket explicitly mentions this clone by its internal or external name, or its accession; clones which merely fall into an area spanned by a JIRA ticket will NOT receive a link to that ticket in this menu.</li>
+       </ul>
+       </p>
+   
+      </ul> <!-- this ends the list or other mappings-->
+     </section> <!--this ends the sction for other mappings-->
+
+
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+     
+     <section id="suptracks" class="content-header"><a name="suptracks"></a>
+      <h3>Supplementary Tracks</h3>
+      <ul>
+	
+	<!--SubCat: Jira-->
+	<a name="jira" class="content-header"></a>
+	<li><h3>JIRA</h3></li>
+	<p><img src="i/jira_wt.png" alt="pgp JIRA walkthrough image"></p>
+	<p>The JIRA ticketing system is what the GRC uses to track all issues in the reference genome assemblies for human, mouse and zebrafish.  Linking out to the official system requires GRC curator access and this is not available to the public.
+	<strong>zmenu:</strong> returns link to JIRA ticketing system, and the current status of the issue.</p>
+	
+	<!--SubCat: Clone-->
+	<a name="clone" class="content-header"></a>
+	<li><h3>Clone and Overlaps</h3></li>
+
+	<div>
+	   <a href="#clone_ol_modal" role="button" class="btn btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i> Navigate Overlap</a>
+	 <div>
+	   
+	<p><img src="i/clone_wt.png" alt="pgp clone walkthrough image" class="wt"></p>
+	<p><strong>Clone track</strong> displays the clone with respect to the assembly, this shows the switchpoints used between the neighboring clones and the overlapping region can be viewed via the <strong>overlap track</strong>.  Clones that are in the sequencing pipeline are also present in gapped regions of the assembly.  To see a much global picture of perhaps regions that need to be concentrated on, Region Overview can be used with the clone track on to see all relevant information.</p>
+	<p><strong>Clones</strong><br>
+	Clones are generally gold in colour with the exception to zebrafish where a heatmap colouring system is employed to represent the double haploid fish sequence content in the clones (blue being low and red being high).  More information about the zebrafish genome sequencing project can be found here <a href="http://www.sanger.ac.uk/Projects/D_rerio/faqs.shtml">link</a>.  Gray coloured clones represent clones that are in the pipeline but have not been sequenced.
+	<strong>zmenu:</strong> clone information such as alternate names, library, status and prject tracking link.</p>
+	<p><strong>Overlaps</strong><br>
+	<div style="color:green;font-weight:bold">Green</div>: Overlap variation < 0.4% variation <br>
+	<div style="color:red;font-weight:bold">Red</div>: Overlap variation > 0.4% variation <br>
+	<div style="color:orange;font-weight:bold">Orange</div>: False Gap <br>
+	<strong>zmenu:</strong> returns length,variation and navigation links for the alignment, and to the previous, next good or bad overlap.<br>
+	</p>
+	
+	<!--SubCat: Digests-->
+	<a name="swaI" class="content-header"></a>
+	<li><h3>Insilico Digest</h3></li>
+	<p><img src="i/swai_wt.png" alt="pgp insilico digest walkthrough image" class="wt"></p>
+	<p>Insilico digest using restriction enzyme recognized cut sites.</p>
+	<ul>
+	  <li>SwaI - Human, Mouse.</li>
+	  <li>SpeI - Human.</li>
+	  <li>BamHI - Zebrafish.</li>
+	</ul>
+	<p>Additional enzyme cut sites can be added upon request.</p>
+	<strong>zmenu:</strong> returns fragment size.<br>
+      </ul>
+     </section>
+
+      
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+    <section id="compara" class="content-header"><a name="pgpcompara"></a>
+      <h3>PGP Compara</h3>
+      <a href="#compara_modal" role="button" class="btn btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i> Compara & Patch Example</a>
+      <p>
+      The PGP Compara page allows comparative analysis between
+      assemblies.  Depending on the organism and pgp build in question
+      multiple assemblies can be attached to be analyzed at the same
+      time.
+      </p>
+      <p><img src="i/multispecies_menu_wt.png" alt="pgp multispecies menu walkthrough image" class="wt"></p>
+      <p>Selection of assemblies that have comparative analysis can be
+      turned on via the Select species button.</p>
+      <p><img src="i/compara_selectmenu_wt.png" alt="pgp select spieces menu walkthrough image" class="wt"></p>
+      <p><img src="i/compara_view_wt.png" alt="pgp select spieces menu walkthrough image" class="wt"></p>
+      <p>In the example above three wgs assemblies are compared.  The
+      blocks labelled as REF are the assembly being browsed as
+      reference compared to the the wgs.  Tracks can be added or removed
+      via the "configure this page".    
+    </section>  
+    
+
+    <section id="markerlist" class="content-header"><a name="markerlist"></a>
+      <h3>Marker List</h3>
+      <p><img src="i/markerlist_wt.png" alt="pgp marker list walkthrough image"></p>
+      <p>The table on this page provides a comparison between the physical location and the genetic map location of the aligned markers.  The ability to view the genetic map location can help coordinate the potential re-arrangement of sequence components in the genome.</p>
+      Columns:
+      <ol>
+	<li>Name of the marker and link to its corresponding marker page.</li>
+	<li>Rank/order of markers in region.</li> 
+	<li>Region start of marker.</li>
+	<li>Region end of marker.</li>
+	<li>Clone or component the marker is mapped/placed to.</li>
+	<li>Individual marker libraries.  With each entry following the format: (chromosome)mp:map position.  If the chromosome is different from the current in view it will be highlighted red.</li>  
+      </ol>
+      <p>Results can be exported as a comma-delimited file (CSV).</p>
+    </section>
+
+      
+     <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+     <!-- Next Section -->
+
+
+    <section id="punchlist" class="content-header"><a name="punchlist"></a>
+      <h3>Punchlists</h3>
+      <p><img src="i/punchlist_wt.png" alt="pgp punchlist walkthrough image"></p>
+      <p>Punchlists are automated lists created with the intention that it gives a quick list to navigate to common issues or regions of interest.  Usually separated by chromosomes, analysts responsible for specific chromosomes can use this as an opportunity to go through each region of interest one by one.<br>
+      Current examples include:
+
+      <table class="table table-striped">
+	<thead>
+	  <th>Punchlist</th><th>description</th><th>-</th>
+	</thead>
+	<tbody>
+	  <tr><td>High Variation Overlaps</td><td>list of all component/component overlaps not meeting variation criteria</td><td>-</td></tr>
+	  <tr><td>False and True Gaps</td><td>list of regions where a gap in the assembly is present</td><td>-</td></tr>
+	  <tr><td>JIRA Tickets</td><td>list of Jira tickets, region they are referring to</td><td>-</td></tr>
+	  <tr><td>Gap Spanners</td><td>list of potential gap spanning end reads</td><td>-</td></tr>
+	  <tr><td>Complete Overlapping/Contained Clones</td><td>list of clones that are in tilepath as contained or being completely overlapped by flanking components</td><td>-</td></tr>
+	  <tr><td>Selfcomp Overlaps</td><td>list of selfcomp overlaps on components that potentially align to adjacent clones  </td><td>-</td></tr>
+	</tbody>  
+      </table>
+      </p>
+      <p class="text-info">More lists can be added upon request.</p>
+    </section>
+
+
+    <!-- Next Section -->
+     <hr class="bs-docs-separator"/>
+    <!-- Next Section -->
+
+    <section id="allexamples" class="content-header"><a name="allexamples"></a>
+      <h3>All Examples</h3>
+      <table class="table table-striped">
+	<thead>
+	  <tr><th>Section</th><th>Example</th></tr>
+	</thead>
+	<tbody>  
+	  <tr><td><a href='#selfcomp'>Selfcomp</a></td><td><a href="#mymodal" role="button" class="btn btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i> Gap Closure</a></td></tr>
+	  <tr><td><a href='#clone'>Clone Overlap</a></td><td><a href="#clone_ol_modal" role="button" class="btn btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i> Navigate Overlap</a></td></tr>
+	  <tr><td><a href='#compara'>PGP Compara</a></td><td><a href="#compara_modal" role="button" class="btn btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i>Compara & Patch Example</a></td></tr>
+	</tbody>
+      </table>
+    </section>
+    <!-- END: ALL CATEGORIES-->  
+
+    </div><!-- div class8 -->
+    
+    
+   </div>
+  </div>
+  
+
+  
+<!----------------------------------------------------------------------------->
+<!--- MODAL LOCATION: These are the blue popups ---> 
+<!----------------------------------------------------------------------------->
+
+  
+  <!--Modal: SelfComp-->  
+
+  <div id="mymodal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Selfcomp Gap Closure Example</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+    <dl>
+      <dt>Scenario</dt>
+      <dd>Clone picked for sequencing to close gap between components may not be necessary</dd>
+      <dt>Description</dt>
+      <dd>Turning on the selfcomp track reveals green blocks on components adjacent to the gap in question (see image).  The green shading of selfcomp indicates matching sequencing in a neighboring region within 500kb. Pressing the result's zmenu will return the hit information indicating the component flanking the gap are of high similarity and possibly can overlap.
+	<img src="i/modal-examples/modal_selfcomp.png" alt="selfcomp example image">
+      </dd>
+      <dt>Resolution</dt>
+      <dd>Re-evaluate the potential for closure and overlap and the actual need/removal for the addition of a clone for sequencing (grey block in clone track)</dd>
+    </dl>
+  <div class="well">
+    <b class="text-info">Tip:</b><small>
+    Depnding on organism, there may be a selfcomp overlap punchlist which indicates all possible potential overlapping components separated by gaps</small>
+  </div>
+  </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+  </div>
+  <!--End: Modal: Selfcomp-->
+  
+
+  <!--Modal: Clone and Overlap-->  
+
+  <div id="clone_ol_modal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Overlap Navigation Example</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+    <dl>
+      <dt>Scenario</dt>
+      <dd>Evaluating Overlaps that are good or low quality can be navigated in browser</dd>
+      <dt>Description</dt>
+      <dd>Clicking on any overlap zmenu will reveal navigational links to the next/previous good/low quality overlaps (see image), allowing for the ability to walk across a chromosome/scaffold to evalute region of interest.
+	<img src="i/modal-examples/modal_clone_ol.png" alt="Clone and Overlap Nav example image">
+      </dd>
+    </dl>
+  <div class="well">
+    <b class="text-info">Tip:</b><small>
+    There are low quality overlap punchlists ordered and separated by chromosome/scaffolds</small>
+  </div>
+  </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+  </div>
+  <!--End: Modal: Clone & Overlap-->
+
+
+  
+
+  <!--Modal: PGP Compara & Patch-->
+
+  <div id="compara_modal" class="modal hide fade" style="width:900px; margin: -250px 0 0 -450px;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>PGP Compara & Patch Example</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+    <dl>
+      <dt>Scenario</dt>
+      <dd>PGP Compara can be used to identify regions of difference or
+  variance in alternate assemblies.  This can be applied to a fix or
+  novel patch in future reference assembly releases.  It can also
+  explain variation within a specific region of interest.</dd>
+      <dt>Description</dt>
+      <dd><p>Below are two images, one from GRCH37 and the second the
+  same region but with a GRC Patch (see [add link] regarding patch).
+  The first image shows one clone AC0691.37 and its compara results
+  to the Human Huref and YH1 assemblies.  As indicated by the red
+  circles/missing area, there is a region that is not represented by
+  this clone by following the alignment[green shading]</p>  The second
+  image shows the patched region, with an additional clone (AC208170.4) in between
+  the original clone (AC0691.37).  As indicated by the green/novel
+  circles, the sequence is now represented in the reference as a patch.</p>
+	
+	<p>
+	<dt>Fig1. <small>The use of Compara to indicate a potential
+	missing or alternate region of interest in the human reference as
+	compared to the human HuRef and YH1 assemblies.</small></dt>
+	<img src="i/modal-examples/modal_patch_compara_b4.png"
+  alt="Compara before example image">
+	<dt>Fig2. <small>The addition of a new clone via a patch to the
+	reference reflects the changes as described in the previous image.</small></dt>
+
+	<img src="i/modal-examples/modal_patch_compara_after.png"
+  alt="Clonewith patch added example image">
+	</p>
+      </dd>
+    </dl>
+
+
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+  <!--End: Modal: PGP Compara & Patch-->
+    
+
+
+
+
+  
+  
+</body>
+</html>
